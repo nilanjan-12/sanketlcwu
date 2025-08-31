@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover the impact of SANKET NGO through community stories, testimonials, and transformation journeys.">
+    <title>Community Impact Stories - SANKET NGO</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Additional CSS for Impact Stories Page -->
+    <style>
+        /* Story Cards Styles */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .story-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .story-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .story-card:hover .story-image img {
+            transform: scale(1.05);
+        }
+        
+        .story-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .story-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .story-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .story-meta .location {
+            display: flex;
+            align-items: center;
+        }
+        
+        .story-meta .location i {
+            margin-right: 0.3rem;
+            color: var(--primary-color);
+        }
+        
+        .story-meta .date {
+            margin-left: auto;
+        }
+        
+        .story-content h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+        
+        .story-excerpt {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .story-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .impact-numbers {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .impact-numbers i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        /* Featured Story Styles */
+        .featured-story {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+        
+        .featured-story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .featured-story-image {
+            height: 100%;
+            min-height: 500px;
+            overflow: hidden;
+        }
+        
+        .featured-story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-story-text {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .featured-label {
+            display: inline-block;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-story-text h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            line-height: 1.3;
+            color: var(--text-dark);
+        }
+        
+        .featured-story-text p {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .featured-quote {
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+        
+        .featured-quote blockquote {
+            margin: 0;
+            font-style: italic;
+            color: var(--text-dark);
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .featured-quote blockquote:before {
+            content: '\201C';
+            font-size: 3rem;
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            color: var(--primary-color);
+            opacity: 0.5;
+        }
+        
+        .quote-author {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .quote-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        .author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        /* Impact Statistics Styles */
+        .impact-stats-section {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            color: var(--text-medium);
+            font-size: 1rem;
+        }
+        
+        /* Testimonial Carousel Styles */
+        .testimonial-section {
+            padding: 4rem 0;
+        }
+        
+        .testimonial-carousel {
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .testimonial-slide {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 1rem;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1.5rem;
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-author h4 {
+            margin: 0 0 0.3rem;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-author p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-quote {
+            position: relative;
+            padding: 0.5rem 0;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-quote i {
+            color: rgba(var(--primary-rgb), 0.2);
+            font-size: 1.5rem;
+            position: absolute;
+        }
+        
+        .testimonial-quote i.fa-quote-left {
+            top: 0;
+            left: 0;
+        }
+        
+        .testimonial-quote i.fa-quote-right {
+            bottom: 0;
+            right: 0;
+        }
+        
+        .testimonial-quote p {
+            margin: 0;
+            padding: 0 2rem;
+        }
+        
+        /* Impact Map Styles */
+        .impact-map-section {
+            padding: 4rem 0;
+            background-color: var(--light-bg);
+        }
+        
+        .map-container {
+            height: 500px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 400px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .map-card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .map-card p {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+        
+        .region-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .region-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .region-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .region-list li i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        /* Share Your Story Section */
+        .share-story-section {
+            padding: 4rem 0;
+        }
+        
+        .share-story-container {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .share-story-image {
+            height: 100%;
+            min-height: 400px;
+        }
+        
+        .share-story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .share-story-form {
+            padding: 3rem;
+        }
+        
+        .share-story-form h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .share-story-form p {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+            outline: none;
+        }
+        
+        /* Responsive Adjustments */
+        @media screen and (max-width: 992px) {
+            .featured-story-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-story-image {
+                min-height: 300px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .share-story-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .share-story-image {
+                min-height: 300px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>SANKET</h1>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </a>
+                </div>
+                
+                <nav>
+                    <button class="menu-toggle" aria-label="Toggle navigation menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="journey.html">Journey So Far</a></li>
+                        <li><a href="volunteer.html">Volunteering</a></li>
+                        <li><a href="impact.html" class="active">Community Impact</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <!-- Hero Section with Image Carousel -->
+        <section class="page-hero">
+            <div class="carousel-container" id="impact-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Community+Impact" alt="SANKET volunteers working with community members">
+                        <div class="carousel-caption">
+                            <h2>SANKET for Us</h2>
+                            <p>Stories of transformation and community impact</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Changing+Lives" alt="Children in a SANKET education program">
+                        <div class="carousel-caption">
+                            <h2>Changing Lives</h2>
+                            <p>How our initiatives create lasting positive change</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Community+Voices" alt="Community members sharing their stories">
+                        <div class="carousel-caption">
+                            <h2>Community Voices</h2>
+                            <p>Real stories from the people we serve</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-button prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+        
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Stories of Change</h2>
+                    <p class="subtitle">Real impact in the lives of communities we serve</p>
+                </div>
+                
+                <div class="intro-content">
+                    <p>At SANKET, we believe in the power of stories to inspire, connect, and drive change. The stories shared here are testament to the resilience of communities and individuals who, with support and opportunity, have transformed their lives and the world around them.</p>
+                    
+                    <p>Each narrative represents countless hours of dedication, collaboration, and perseverance. They showcase not just what SANKET has accomplished, but what communities can achieve when empowered with the right resources and support.</p>
+                    
+                    <p>As you explore these stories, we invite you to see beyond the statistics and connect with the human experiences that drive our mission forward.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Story Section -->
+        <section class="featured-story-section">
+            <div class="container">
+                <div class="featured-story">
+                    <div class="featured-story-content">
+                        <div class="featured-story-image">
+                            <img src="https://placehold.co/800x600/e9ecef/495057?text=Featured+Story" alt="Women in a rural village operating a sustainable business">
+                        </div>
+                        <div class="featured-story-text">
+                            <span class="featured-label">Featured Story</span>
+                            <h2>From Struggle to Strength: The Women of Rajgarh Village</h2>
+                            <p>In the remote village of Rajgarh, a group of 15 women have transformed not just their own lives but the economic landscape of their entire community. What began as a small skill development workshop by SANKET in 2019 has evolved into a thriving cooperative that produces and sells handcrafted textiles to markets across India and internationally.</p>
+                            <p>The cooperative now generates sustainable income for over 50 families, has funded a community center, and sponsors education for girls in the village. Most importantly, it has shifted perceptions about women's roles and capabilities in a traditionally patriarchal setting.</p>
+                            <div class="featured-quote">
+                                <blockquote>
+                                    Before SANKET came to our village, I had never earned money in my life. Today, I am the financial decision-maker in my family and have sent both my daughters to college. We didn't just learn to make products; we learned to believe in ourselves.
+                                </blockquote>
+                                <div class="quote-author">
+                                    <img src="https://placehold.co/100x100/e9ecef/495057?text=S.D" alt="Sunita Devi">
+                                    <div class="author-info">
+                                        <h4>Sunita Devi</h4>
+                                        <p>Cooperative Chairperson</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Impact Statistics Section -->
+        <section class="impact-stats-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Impact in Numbers</h2>
+                    <p class="subtitle">Measuring the change we've created together</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-number">15,000+</div>
+                        <div class="stat-label">Children Educated</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="stat-number">120</div>
+                        <div class="stat-label">Communities Served</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label">Trees Planted</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="stat-number">3,500+</div>
+                        <div class="stat-label">Jobs Created</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Stories Grid -->
+        <section class="stories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Community Impact Stories</h2>
+                    <p class="subtitle">Transformations that inspire us every day</p>
+                </div>
+                
+                <div class="story-grid">
+                    <!-- Story 1 -->
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Education" alt="Children in a SANKET education center">
+                            <span class="story-category">Education</span>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-meta">
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> Delhi, India</span>
+                                <span class="date">June 2023</span>
+                            </div>
+                            <h3>Digital Literacy Transforms Urban Slum</h3>
+                            <p class="story-excerpt">How a computer lab in Seemapuri is opening new doors for children and adults alike, creating first-generation digital professionals from one of Delhi's most underserved communities.</p>
+                            <div class="story-footer">
+                                <span class="impact-numbers"><i class="fas fa-users"></i> 350+ Beneficiaries</span>
+                                <a href="#" class="btn text-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 2 -->
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Healthcare" alt="SANKET health camp in a rural village">
+                            <span class="story-category">Healthcare</span>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-meta">
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> Rajasthan, India</span>
+                                <span class="date">April 2023</span>
+                            </div>
+                            <h3>Mobile Health Clinics Reach the Unreached</h3>
+                            <p class="story-excerpt">Our fleet of mobile health clinics is bringing essential medical care to remote villages in Rajasthan, where the nearest hospital can be over 50 kilometers away.</p>
+                            <div class="story-footer">
+                                <span class="impact-numbers"><i class="fas fa-users"></i> 12,000+ Patients</span>
+                                <a href="#" class="btn text-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 3 -->
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Environment" alt="Community members participating in a river clean-up">
+                            <span class="story-category">Environment</span>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-meta">
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> Uttarakhand, India</span>
+                                <span class="date">March 2023</span>
+                            </div>
+                            <h3>River Restoration Project Revives Local Economy</h3>
+                            <p class="story-excerpt">How cleaning and protecting the Bhagirathi River has not only improved the ecosystem but also boosted tourism and created sustainable livelihoods for riverside communities.</p>
+                            <div class="story-footer">
+                                <span class="impact-numbers"><i class="fas fa-users"></i> 8 Villages Impacted</span>
+                                <a href="#" class="btn text-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 4 -->
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Women+Empowerment" alt="Women in a skill development workshop">
+                            <span class="story-category">Women Empowerment</span>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-meta">
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> Bihar, India</span>
+                                <span class="date">February 2023</span>
+                            </div>
+                            <h3>Microfinance Initiative Creates Women Entrepreneurs</h3>
+                            <p class="story-excerpt">A group of 30 women from marginalized communities have established thriving businesses through SANKET's microfinance and mentorship program, challenging social norms and inspiring others.</p>
+                            <div class="story-footer">
+                                <span class="impact-numbers"><i class="fas fa-users"></i> 30 Businesses Launched</span>
+                                <a href="#" class="btn text-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 5 -->
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Agriculture" alt="Farmers learning sustainable farming techniques">
+                            <span class="story-category">Agriculture</span>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-meta">
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> Maharashtra, India</span>
+                                <span class="date">January 2023</span>
+                            </div>
+                            <h3>Organic Farming Transforms Drought-Prone Region</h3>
+                            <p class="story-excerpt">Farmers in Marathwada have doubled their income while using 60% less water through SANKET's sustainable agriculture program, creating a model for climate-resilient farming.</p>
+                            <div class="story-footer">
+                                <span class="impact-numbers"><i class="fas fa-users"></i> 200+ Farmer Families</span>
+                                <a href="#" class="btn text-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 6 -->
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Youth+Development" alt="Youth participating in a leadership workshop">
+                            <span class="story-category">Youth Development</span>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-meta">
+                                <span class="location"><i class="fas fa-map-marker-alt"></i> West Bengal, India</span>
+                                <span class="date">December 2022</span>
+                            </div>
+                            <h3>Youth Leaders Drive Community Change</h3>
+                            <p class="story-excerpt">Graduates of SANKET's youth leadership program have initiated 15 community projects addressing local challenges from waste management to gender equality education.</p>
+                            <div class="story-footer">
+                                <span class="impact-numbers"><i class="fas fa-users"></i> 50 Youth Leaders</span>
+                                <a href="#" class="btn text-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="#" class="btn primary-btn">Load More Stories</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonial Carousel Section -->
+        <section class="testimonial-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Voices from the Community</h2>
+                    <p class="subtitle">Hear directly from those whose lives have been touched</p>
+                </div>
+                
+                <div class="carousel-container" id="testimonial-carousel">
+                    <div class="carousel-track">
+                        <!-- Testimonial 1 -->
+                        <div class="carousel-slide">
+                            <div class="testimonial-slide">
+                                <div class="testimonial-header">
+                                    <div class="testimonial-avatar">
+                                        <img src="https://placehold.co/200x200/e9ecef/495057?text=R.S" alt="Ramesh Singh">
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <h4>Ramesh Singh</h4>
+                                        <p>Farmer, Marathwada</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    <p>Before SANKET's agricultural program, I was considering leaving farming altogether. The drought had made it impossible to earn a living. Now, with organic methods and water conservation techniques, my farm is thriving even in dry years. My children who had left for the city are now returning to join the family business.</p>
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="carousel-slide">
+                            <div class="testimonial-slide">
+                                <div class="testimonial-header">
+                                    <div class="testimonial-avatar">
+                                        <img src="https://placehold.co/200x200/e9ecef/495057?text=L.K" alt="Lakshmi Kumari">
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <h4>Lakshmi Kumari</h4>
+                                        <p>Student, Delhi</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    <p>The digital literacy program changed my life completely. I was the first in my family to use a computer, and now I'm studying computer science at university. The mentors at SANKET didn't just teach me technical skills; they showed me that someone from my background could succeed in the tech world.</p>
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="carousel-slide">
+                            <div class="testimonial-slide">
+                                <div class="testimonial-header">
+                                    <div class="testimonial-avatar">
+                                        <img src="https://placehold.co/200x200/e9ecef/495057?text=A.P" alt="Arjun Patel">
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <h4>Arjun Patel</h4>
+                                        <p>Village Head, Uttarakhand</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    <p>Our village had been losing its youth to migration for decades. Since partnering with SANKET on the river restoration project, we've seen a revival not just of our environment but of our community spirit. Young people are finding meaningful work here, and our traditional knowledge is being valued and preserved alongside modern conservation techniques.</p>
+                                    <i class="fas fa-quote-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-button prev" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-button next" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <div class="carousel-indicators"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Impact Map Section -->
+        <section class="impact-map-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Where We Work</h2>
+                    <p class="subtitle">Our impact spans across diverse regions of India</p>
+                </div>
+                
+                <div class="map-container">
+                    <img src="https://placehold.co/1200x600/e9ecef/495057?text=Map+of+India+with+SANKET+Impact+Regions" alt="Map showing SANKET's areas of operation across India">
+                    <div class="map-overlay">
+                        <div class="map-card">
+                            <h3>Our Reach</h3>
+                            <p>SANKET currently operates in 12 states across India, with a focus on both urban underserved communities and remote rural areas.</p>
+                            <ul class="region-list">
+                                <li><i class="fas fa-map-pin"></i> Delhi NCR - Urban Education & Digital Literacy</li>
+                                <li><i class="fas fa-map-pin"></i> Rajasthan - Healthcare & Women Empowerment</li>
+                                <li><i class="fas fa-map-pin"></i> Uttarakhand - Environmental Conservation</li>
+                                <li><i class="fas fa-map-pin"></i> Maharashtra - Sustainable Agriculture</li>
+                                <li><i class="fas fa-map-pin"></i> Bihar - Microfinance & Entrepreneurship</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Share Your Story Section -->
+        <section class="share-story-section">
+            <div class="container">
+                <div class="share-story-container">
+                    <div class="share-story-form">
+                        <h3>Share Your SANKET Story</h3>
+                        <p>Have you been impacted by SANKET's work? We'd love to hear and potentially feature your story.</p>
+                        
+                        <form class="story-submission-form" novalidate>
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name*</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address*</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="location">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="program" class="form-label">Which SANKET program were you involved with?*</label>
+                                <select class="form-control" id="program" name="program" required>
+                                    <option value="" selected disabled>Select a program</option>
+                                    <option value="education">Education & Digital Literacy</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="environment">Environmental Conservation</option>
+                                    <option value="women">Women Empowerment</option>
+                                    <option value="agriculture">Sustainable Agriculture</option>
+                                    <option value="youth">Youth Leadership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="story" class="form-label">Your Story*</label>
+                                <textarea class="form-control" id="story" name="story" rows="5" placeholder="Tell us how SANKET has impacted your life or community..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="photo" class="form-label">Upload a Photo (optional)</label>
+                                <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                                <small class="form-text">Max file size: 5MB</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="permission" name="permission" required>
+                                    <label class="form-check-label" for="permission">
+                                        I give SANKET permission to share my story on their website and other communications.*
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn primary-btn">Submit Your Story</button>
+                        </form>
+                    </div>
+                    
+                    <div class="share-story-image">
+                        <img src="https://placehold.co/800x600/e9ecef/495057?text=Share+Your+Story" alt="Community members sharing their experiences">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="cta-section bg-primary">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Be Part of Our Impact Story</h2>
+                    <p>Join us in creating positive change that transforms lives and communities.</p>
+                    <div class="cta-buttons">
+                        <a href="volunteer.html" class="btn light-btn">Volunteer With Us</a>
+                        <a href="#" class="btn outline-light-btn">Donate Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <h2>SANKET</h2>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </div>
+                    <p>SANKET is a non-governmental organization dedicated to empowering communities through education, skill development, and sustainable initiatives.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="journey.html">Journey So Far</a></li>
+                            <li><a href="volunteer.html">Volunteering</a></li>
+                            <li><a href="impact.html">Community Impact</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Programs</h3>
+                        <ul>
+                            <li><a href="#">Education Initiatives</a></li>
+                            <li><a href="#">Skill Development</a></li>
+                            <li><a href="#">Community Outreach</a></li>
+                            <li><a href="#">Environmental Projects</a></li>
+                            <li><a href="#">Health & Wellness</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">Donate</a></li>
+                            <li><a href="#">Fundraise</a></li>
+                            <li><a href="#">Corporate Partnerships</a></li>
+                            <li><a href="#">Volunteer</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Community Lane, New Delhi, 110001</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+911234567890">+91 123 456 7890</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@sanket.org">info@sanket.org</a></p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SANKET NGO. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize impact page carousels
+            new Carousel(document.getElementById('impact-carousel'), {
+                autoplay: true,
+                interval: 5000
+            });
+            
+            new Carousel(document.getElementById('testimonial-carousel'), {
+                autoplay: true,
+                interval: 8000
+            });
+            
+            // Form validation
+            const storyForm = document.querySelector('.story-submission-form');
+            
+            if (storyForm) {
+                storyForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    let isValid = true;
+                    const requiredFields = storyForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.classList.add('is-invalid');
+                        } else {
+                            field.classList.remove('is-invalid');
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // In a real implementation, this would submit the form data
+                        alert('Thank you for sharing your story! We will review it and may contact you for more details.');
+                        storyForm.reset();
+                    }
+                });
+            }
+            
+            // Animation for statistics
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const animateStats = () => {
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.textContent.replace(/,/g, '').replace(/\+/g, ''));
+                    const duration = 2000; // 2 seconds
+                    const step = target / (duration / 16); // 60fps
+                    let current = 0;
+                    
+                    const updateStat = () => {
+                        current += step;
+                        if (current < target) {
+                            stat.textContent = Math.floor(current).toLocaleString() + (stat.textContent.includes('+') ? '+' : '');
+                            requestAnimationFrame(updateStat);
+                        } else {
+                            stat.textContent = target.toLocaleString() + (stat.textContent.includes('+') ? '+' : '');
+                        }
+                    };
+                    
+                    updateStat();
+                });
+            };
+            
+            // Use Intersection Observer to trigger animation when stats are in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const statsSection = document.querySelector('.stats-grid');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+    </script>
+</body>
+</html>

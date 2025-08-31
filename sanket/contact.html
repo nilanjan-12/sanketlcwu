@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with SANKET NGO. Contact us for inquiries, partnerships, volunteering opportunities, or to learn more about our programs.">
+    <title>Contact Us - SANKET NGO</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Additional CSS for Contact Page -->
+    <style>
+        /* Contact Form Styles */
+        .contact-form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+        }
+        
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .form-control.is-invalid + .invalid-feedback {
+            display: block;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .form-check-input {
+            margin-right: 0.5rem;
+            margin-top: 0.25rem;
+        }
+        
+        .form-check-label {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        /* Contact Info Styles */
+        .contact-info-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-info-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-info-card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+        
+        .contact-info-card p {
+            margin-bottom: 0.5rem;
+            color: var(--text-medium);
+        }
+        
+        .contact-info-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-info-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Map Styles */
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* FAQ Styles */
+        .faq-container {
+            margin-bottom: 3rem;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(var(--primary-rgb), 0.03);
+        }
+        
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .faq-question i {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        /* Social Media Section */
+        .social-media-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .social-media-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-media-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .social-media-link:hover {
+            transform: translateY(-5px);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Office Hours */
+        .office-hours {
+            margin-top: 1.5rem;
+        }
+        
+        .office-hours h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        
+        .hours-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .day {
+            font-weight: 500;
+        }
+        
+        /* Success Message */
+        .form-success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-media-links {
+                gap: 1rem;
+            }
+            
+            .social-media-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>SANKET</h1>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </a>
+                </div>
+                
+                <nav>
+                    <button class="menu-toggle" aria-label="Toggle navigation menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="journey.html">Journey So Far</a></li>
+                        <li><a href="volunteer.html">Volunteering</a></li>
+                        <li><a href="impact.html">Community Impact</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html" class="active">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <!-- Hero Section with Image Carousel -->
+        <section class="page-hero">
+            <div class="carousel-container" id="contact-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="images/hero-1.svg" alt="Contact SANKET NGO">
+                        <div class="carousel-caption">
+                            <h2>Contact Us</h2>
+                            <p>We'd love to hear from you</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Get+In+Touch" alt="Get in touch with SANKET NGO">
+                        <div class="carousel-caption">
+                            <h2>Get In Touch</h2>
+                            <p>Reach out for inquiries, partnerships, or support</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Connect+With+Us" alt="Connect with SANKET NGO">
+                        <div class="carousel-caption">
+                            <h2>Connect With Us</h2>
+                            <p>Join our community for positive change</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-button prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+        
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get In Touch</h2>
+                    <p class="subtitle">We're here to answer your questions</p>
+                </div>
+                
+                <div class="intro-content">
+                    <p>Whether you have a question about our programs, want to volunteer, partner with us, or simply want to learn more about SANKET's work, we're eager to hear from you. Our team is dedicated to responding to all inquiries promptly and providing the information you need.</p>
+                    
+                    <p>You can reach us through the contact form below, visit our office during business hours, or connect with us through our social media channels. We look forward to connecting with you!</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Information Section -->
+        <section class="contact-info-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact Information</h2>
+                    <p class="subtitle">Multiple ways to reach us</p>
+                </div>
+                
+                <div class="row">
+                    <div class="contact-info-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                        <!-- Office Address -->
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Visit Our Office</h3>
+                            <p>123 Community Lane</p>
+                            <p>New Delhi, 110001</p>
+                            <p>India</p>
+                            
+                            <div class="office-hours">
+                                <h4>Office Hours</h4>
+                                <ul class="hours-list">
+                                    <li><span class="day">Monday - Friday</span> <span>9:00 AM - 6:00 PM</span></li>
+                                    <li><span class="day">Saturday</span> <span>10:00 AM - 2:00 PM</span></li>
+                                    <li><span class="day">Sunday</span> <span>Closed</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone & Email -->
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h3>Call or Email</h3>
+                            <p><strong>Main Office:</strong> <a href="tel:+911234567890">+91 123 456 7890</a></p>
+                            <p><strong>Volunteer Coordinator:</strong> <a href="tel:+911234567891">+91 123 456 7891</a></p>
+                            <p><strong>Donations:</strong> <a href="tel:+911234567892">+91 123 456 7892</a></p>
+                            <p><strong>General Inquiries:</strong> <a href="mailto:info@sanket.org">info@sanket.org</a></p>
+                            <p><strong>Volunteer Opportunities:</strong> <a href="mailto:volunteer@sanket.org">volunteer@sanket.org</a></p>
+                            <p><strong>Donations & Partnerships:</strong> <a href="mailto:partnerships@sanket.org">partnerships@sanket.org</a></p>
+                        </div>
+                        
+                        <!-- Regional Offices -->
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Regional Offices</h3>
+                            <p><strong>Mumbai:</strong> 456 Seashore Road, Mumbai, 400001</p>
+                            <p><strong>Bangalore:</strong> 789 Tech Park, Bangalore, 560001</p>
+                            <p><strong>Kolkata:</strong> 321 River View, Kolkata, 700001</p>
+                            <p><strong>Chennai:</strong> 654 Beach Road, Chennai, 600001</p>
+                            <p><strong>Rural Center:</strong> Village Outreach Center, Gurgaon Outskirts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Find Us</h2>
+                    <p class="subtitle">Our location on the map</p>
+                </div>
+                
+                <div class="map-container">
+                    <!-- Replace with actual Google Maps embed code -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.9484043236513!2d77.22558931508096!3d28.632176482418436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi%20110001!5e0!3m2!1sen!2sin!4v1629789562873!5m2!1sen!2sin" allowfullscreen="" loading="lazy" title="SANKET NGO Office Location"></iframe>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Send Us a Message</h2>
+                    <p class="subtitle">We'll get back to you as soon as possible</p>
+                </div>
+                
+                <div class="row" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <div class="contact-form-container">
+                        <div class="form-success-message" id="form-success">
+                            <i class="fas fa-check-circle"></i> Thank you for your message! We'll get back to you shortly.
+                        </div>
+                        
+                        <form id="contact-form" class="contact-form" novalidate>
+                            <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label for="first-name" class="form-label">First Name*</label>
+                                    <input type="text" class="form-control" id="first-name" name="first-name" required>
+                                    <div class="invalid-feedback">Please enter your first name</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="last-name" class="form-label">Last Name*</label>
+                                    <input type="text" class="form-control" id="last-name" name="last-name" required>
+                                    <div class="invalid-feedback">Please enter your last name</div>
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address*</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback">Please enter a valid email address</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject*</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                                <div class="invalid-feedback">Please enter a subject</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inquiry-type" class="form-label">Inquiry Type*</label>
+                                <select class="form-control" id="inquiry-type" name="inquiry-type" required>
+                                    <option value="" selected disabled>Select an option</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="volunteer">Volunteering</option>
+                                    <option value="donation">Donation</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="media">Media Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="invalid-feedback">Please select an inquiry type</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message*</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                <div class="invalid-feedback">Please enter your message</div>
+                            </div>
+                            
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter">
+                                <label class="form-check-label" for="newsletter">Subscribe to our newsletter to stay updated on our activities and events</label>
+                            </div>
+                            
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="privacy-policy" name="privacy-policy" required>
+                                <label class="form-check-label" for="privacy-policy">I have read and agree to the <a href="#">Privacy Policy</a>*</label>
+                                <div class="invalid-feedback">You must agree to our privacy policy</div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn primary-btn">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="faq-container">
+                        <h3>Frequently Asked Questions</h3>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How can I volunteer with SANKET?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You can volunteer with SANKET by visiting our Volunteering page and filling out the registration form. We offer various volunteering opportunities based on your skills, interests, and availability.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How can I donate to SANKET?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You can donate to SANKET through our website's donation page. We accept various payment methods, including credit/debit cards, net banking, and UPI. All donations are tax-deductible under Section 80G.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Can I partner with SANKET for CSR activities?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, SANKET welcomes corporate partnerships for CSR initiatives. Please contact our partnerships team at partnerships@sanket.org to discuss potential collaboration opportunities.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How can I stay updated on SANKET's activities?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You can stay updated on our activities by subscribing to our newsletter, following us on social media, or regularly visiting our website's Events and News sections.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Does SANKET offer internship opportunities?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, we offer internship opportunities for students and young professionals in various fields. Please send your resume and a cover letter to volunteer@sanket.org with the subject line "Internship Application".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Social Media Section -->
+        <section class="social-media-section bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Connect With Us</h2>
+                    <p class="subtitle">Follow us on social media for updates and stories</p>
+                </div>
+                
+                <div class="social-media-links">
+                    <a href="#" class="social-media-link" aria-label="Follow us on Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-media-link" aria-label="Follow us on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-media-link" aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-media-link" aria-label="Follow us on LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-media-link" aria-label="Subscribe to our YouTube channel">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="cta-section bg-primary">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Join Our Community</h2>
+                    <p>Subscribe to our newsletter to receive updates on our activities, events, and impact stories.</p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your email address" required>
+                            <button type="submit" class="btn light-btn">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <h2>SANKET</h2>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </div>
+                    <p>SANKET is a non-governmental organization dedicated to empowering communities through education, skill development, and sustainable initiatives.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="journey.html">Journey So Far</a></li>
+                            <li><a href="volunteer.html">Volunteering</a></li>
+                            <li><a href="impact.html">Community Impact</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Programs</h3>
+                        <ul>
+                            <li><a href="#">Education Initiatives</a></li>
+                            <li><a href="#">Skill Development</a></li>
+                            <li><a href="#">Community Outreach</a></li>
+                            <li><a href="#">Environmental Projects</a></li>
+                            <li><a href="#">Health & Wellness</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">Donate</a></li>
+                            <li><a href="#">Fundraise</a></li>
+                            <li><a href="#">Corporate Partnerships</a></li>
+                            <li><a href="#">Volunteer</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Community Lane, New Delhi, 110001</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+911234567890">+91 123 456 7890</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@sanket.org">info@sanket.org</a></p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SANKET NGO. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize contact page carousel
+            new Carousel(document.getElementById('contact-carousel'), {
+                autoplay: true,
+                interval: 5000
+            });
+            
+            // Form validation
+            const contactForm = document.getElementById('contact-form');
+            const formSuccess = document.getElementById('form-success');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    let isValid = true;
+                    const requiredFields = contactForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!validateField(field)) {
+                            isValid = false;
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // In a real implementation, this would submit the form data
+                        formSuccess.style.display = 'block';
+                        contactForm.reset();
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            formSuccess.style.display = 'none';
+                        }, 5000);
+                    }
+                });
+                
+                // Live validation on input
+                const inputFields = contactForm.querySelectorAll('input, select, textarea');
+                inputFields.forEach(field => {
+                    field.addEventListener('blur', function() {
+                        validateField(field);
+                    });
+                    
+                    field.addEventListener('input', function() {
+                        if (field.classList.contains('is-invalid')) {
+                            validateField(field);
+                        }
+                    });
+                });
+            }
+            
+            function validateField(field) {
+                if (field.hasAttribute('required') && !field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    return false;
+                } else if (field.type === 'email' && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        field.classList.add('is-invalid');
+                        return false;
+                    }
+                }
+                
+                field.classList.remove('is-invalid');
+                return true;
+            }
+            
+            // FAQ accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

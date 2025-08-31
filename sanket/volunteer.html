@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Volunteer with SANKET NGO. Discover volunteering opportunities and register to make a difference in communities across India.">
+    <title>Volunteering - SANKET NGO</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Additional CSS for Volunteer Page -->
+    <style>
+        /* Volunteer Opportunities Styles */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .opportunity-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .opportunity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .opportunity-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .opportunity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .opportunity-card:hover .opportunity-image img {
+            transform: scale(1.05);
+        }
+        
+        .opportunity-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .opportunity-content h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .opportunity-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-right: 1rem;
+        }
+        
+        .meta-item i {
+            margin-right: 0.3rem;
+            color: var(--primary-color);
+        }
+        
+        .opportunity-description {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .opportunity-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            background-color: var(--light-bg);
+            color: var(--text-medium);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Registration Form Styles */
+        .registration-section {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+        }
+        
+        .registration-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .registration-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .registration-header h2 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .registration-form {
+            padding: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+            outline: none;
+        }
+        
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .form-check-input {
+            margin-right: 0.5rem;
+            margin-top: 0.3rem;
+        }
+        
+        .form-check-label {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        .form-submit {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        /* Volunteer Benefits Section */
+        .benefits-section {
+            padding: 4rem 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .benefit-card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .benefit-card p {
+            color: var(--text-medium);
+            margin-bottom: 0;
+        }
+        
+        /* Volunteer Stories Section */
+        .stories-section {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+        }
+        
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .story-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .story-content {
+            padding: 1.5rem;
+        }
+        
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .story-author h4 {
+            margin: 0 0 0.3rem;
+            color: var(--text-dark);
+        }
+        
+        .story-author p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .story-quote {
+            position: relative;
+            padding: 1rem 0;
+            color: var(--text-medium);
+        }
+        
+        .story-quote i {
+            color: rgba(var(--primary-rgb), 0.2);
+            font-size: 1.5rem;
+            position: absolute;
+        }
+        
+        .story-quote i.fa-quote-left {
+            top: 0;
+            left: 0;
+        }
+        
+        .story-quote i.fa-quote-right {
+            bottom: 0;
+            right: 0;
+        }
+        
+        .story-quote p {
+            margin: 0;
+            padding: 0 2rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(var(--primary-rgb), 0.05);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            background-color: rgba(var(--primary-rgb), 0.1);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1rem 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>SANKET</h1>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </a>
+                </div>
+                
+                <nav>
+                    <button class="menu-toggle" aria-label="Toggle navigation menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="journey.html">Journey So Far</a></li>
+                        <li><a href="volunteer.html" class="active">Volunteering</a></li>
+                        <li><a href="impact.html">Community Impact</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <!-- Hero Section with Image Carousel -->
+        <section class="page-hero">
+            <div class="carousel-container" id="volunteer-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="images/hero-1.svg" alt="Volunteers working together at a SANKET community event">
+                        <div class="carousel-caption">
+                            <h2>Volunteer With SANKET</h2>
+                            <p>Join our mission to create positive change in communities</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/hero-2.svg" alt="SANKET volunteers teaching children in a classroom setting">
+                        <div class="carousel-caption">
+                            <h2>Make a Lasting Impact</h2>
+                            <p>Share your skills and time to transform lives</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/hero-3.svg" alt="Group of diverse SANKET volunteers smiling together">
+                        <div class="carousel-caption">
+                            <h2>Join Our Community</h2>
+                            <p>Connect with like-minded individuals dedicated to social change</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-button prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+        
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Volunteer With Us?</h2>
+                    <p class="subtitle">Make a difference while growing personally and professionally</p>
+                </div>
+                
+                <div class="intro-content">
+                    <p>Volunteering with SANKET is more than just giving your time—it's about becoming part of a movement that creates meaningful change from within. Our volunteers are the backbone of our organization, bringing diverse skills, perspectives, and passion to our mission.</p>
+                    
+                    <p>Whether you can commit a few hours a week or join us for specific projects, your contribution matters. We offer a range of volunteering opportunities that match your interests, skills, and availability, ensuring that your experience is both impactful and fulfilling.</p>
+                    
+                    <p>Join our community of change-makers and discover how giving back can transform not only the lives of others but also your own.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Volunteer Benefits Section -->
+        <section class="benefits-section bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Benefits of Volunteering</h2>
+                    <p class="subtitle">What you gain while giving back</p>
+                </div>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Make a Real Impact</h3>
+                        <p>See the direct results of your contribution in the communities we serve, creating positive change that lasts.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3>Build Connections</h3>
+                        <p>Meet like-minded individuals and form meaningful relationships with people who share your values and passion.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Develop New Skills</h3>
+                        <p>Gain valuable experience and develop both personal and professional skills that enhance your career prospects.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Boost Well-being</h3>
+                        <p>Experience improved mental and emotional health through the satisfaction of helping others and contributing to society.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Volunteer Opportunities Section -->
+        <section class="opportunities-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Volunteer Opportunities</h2>
+                    <p class="subtitle">Find the perfect role that matches your skills and interests</p>
+                </div>
+                
+                <div class="opportunities-grid">
+                    <!-- Opportunity 1 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Teaching" alt="Volunteer teaching children in a classroom">
+                        </div>
+                        <div class="opportunity-content">
+                            <h3>Education Volunteer</h3>
+                            <div class="opportunity-meta">
+                                <span class="meta-item"><i class="fas fa-clock"></i> 4-8 hours/week</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Multiple Locations</span>
+                            </div>
+                            <div class="opportunity-tags">
+                                <span class="tag">Teaching</span>
+                                <span class="tag">Mentoring</span>
+                                <span class="tag">Education</span>
+                            </div>
+                            <p class="opportunity-description">Support our education programs by teaching, tutoring, or mentoring children and adults in various subjects. Help build foundational skills and inspire a love for learning.</p>
+                            <a href="#registration" class="btn primary-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Opportunity 2 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Event+Planning" alt="Volunteers organizing a community event">
+                        </div>
+                        <div class="opportunity-content">
+                            <h3>Event Coordinator</h3>
+                            <div class="opportunity-meta">
+                                <span class="meta-item"><i class="fas fa-clock"></i> Project-based</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Various Cities</span>
+                            </div>
+                            <div class="opportunity-tags">
+                                <span class="tag">Event Planning</span>
+                                <span class="tag">Coordination</span>
+                                <span class="tag">Leadership</span>
+                            </div>
+                            <p class="opportunity-description">Help plan and execute community events, fundraisers, and awareness campaigns. Use your organizational skills to create impactful experiences for our communities.</p>
+                            <a href="#registration" class="btn primary-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Opportunity 3 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Digital+Skills" alt="Volunteer teaching digital skills to community members">
+                        </div>
+                        <div class="opportunity-content">
+                            <h3>Digital Skills Trainer</h3>
+                            <div class="opportunity-meta">
+                                <span class="meta-item"><i class="fas fa-clock"></i> 2-6 hours/week</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Digital Centers</span>
+                            </div>
+                            <div class="opportunity-tags">
+                                <span class="tag">Technology</span>
+                                <span class="tag">Digital Literacy</span>
+                                <span class="tag">Training</span>
+                            </div>
+                            <p class="opportunity-description">Share your tech knowledge by teaching basic to intermediate digital skills to community members. Help bridge the digital divide and empower others through technology.</p>
+                            <a href="#registration" class="btn primary-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Opportunity 4 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Environmental+Projects" alt="Volunteers participating in a tree planting initiative">
+                        </div>
+                        <div class="opportunity-content">
+                            <h3>Environmental Volunteer</h3>
+                            <div class="opportunity-meta">
+                                <span class="meta-item"><i class="fas fa-clock"></i> Flexible</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Outdoor Locations</span>
+                            </div>
+                            <div class="opportunity-tags">
+                                <span class="tag">Environment</span>
+                                <span class="tag">Conservation</span>
+                                <span class="tag">Sustainability</span>
+                            </div>
+                            <p class="opportunity-description">Participate in environmental conservation projects including tree planting, community gardens, clean-up drives, and sustainability education programs.</p>
+                            <a href="#registration" class="btn primary-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Opportunity 5 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Content+Creation" alt="Volunteer creating content for SANKET's communications">
+                        </div>
+                        <div class="opportunity-content">
+                            <h3>Content Creator</h3>
+                            <div class="opportunity-meta">
+                                <span class="meta-item"><i class="fas fa-clock"></i> Remote/Flexible</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Virtual</span>
+                            </div>
+                            <div class="opportunity-tags">
+                                <span class="tag">Writing</span>
+                                <span class="tag">Design</span>
+                                <span class="tag">Social Media</span>
+                            </div>
+                            <p class="opportunity-description">Use your creative skills to develop content for our website, social media, newsletters, and promotional materials. Help us tell our story and amplify our impact.</p>
+                            <a href="#registration" class="btn primary-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Opportunity 6 -->
+                    <div class="opportunity-card">
+                        <div class="opportunity-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Health+Outreach" alt="Volunteers at a community health camp">
+                        </div>
+                        <div class="opportunity-content">
+                            <h3>Health Outreach Volunteer</h3>
+                            <div class="opportunity-meta">
+                                <span class="meta-item"><i class="fas fa-clock"></i> Weekend Camps</span>
+                                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Community Centers</span>
+                            </div>
+                            <div class="opportunity-tags">
+                                <span class="tag">Healthcare</span>
+                                <span class="tag">Awareness</span>
+                                <span class="tag">Community</span>
+                            </div>
+                            <p class="opportunity-description">Support our health initiatives by assisting at health camps, awareness programs, and wellness workshops. Help communities access better health information and services.</p>
+                            <a href="#registration" class="btn primary-btn">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Volunteer Stories Section -->
+        <section class="stories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Volunteer Stories</h2>
+                    <p class="subtitle">Hear from those who've experienced the joy of volunteering with SANKET</p>
+                </div>
+                
+                <div class="stories-grid">
+                    <!-- Story 1 -->
+                    <div class="story-card">
+                        <div class="story-content">
+                            <div class="story-header">
+                                <div class="story-avatar">
+                                    <img src="https://placehold.co/200x200/e9ecef/495057?text=A.S" alt="Ankit Sharma">
+                                </div>
+                                <div class="story-author">
+                                    <h4>Ankit Sharma</h4>
+                                    <p>Education Volunteer, 2 years</p>
+                                </div>
+                            </div>
+                            <div class="story-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Volunteering as a teacher with SANKET has been the most rewarding experience of my life. Seeing the children's faces light up when they understand a concept is priceless. I've grown so much as a person and educator through this journey.</p>
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 2 -->
+                    <div class="story-card">
+                        <div class="story-content">
+                            <div class="story-header">
+                                <div class="story-avatar">
+                                    <img src="https://placehold.co/200x200/e9ecef/495057?text=P.M" alt="Priya Mehta">
+                                </div>
+                                <div class="story-author">
+                                    <h4>Priya Mehta</h4>
+                                    <p>Digital Skills Trainer, 1.5 years</p>
+                                </div>
+                            </div>
+                            <div class="story-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Teaching digital skills to people who've never used a computer before has been eye-opening. The gratitude they express when they can video call their children working in other cities or apply for government benefits online is truly humbling.</p>
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Story 3 -->
+                    <div class="story-card">
+                        <div class="story-content">
+                            <div class="story-header">
+                                <div class="story-avatar">
+                                    <img src="https://placehold.co/200x200/e9ecef/495057?text=R.K" alt="Rahul Kumar">
+                                </div>
+                                <div class="story-author">
+                                    <h4>Rahul Kumar</h4>
+                                    <p>Environmental Volunteer, 3 years</p>
+                                </div>
+                            </div>
+                            <div class="story-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>What started as a weekend activity has become a passion. Our community garden project has transformed not just the physical space but also how residents interact with each other. SANKET gave me the platform to create lasting change.</p>
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Registration Form Section -->
+        <section id="registration" class="registration-section">
+            <div class="container">
+                <div class="registration-container">
+                    <div class="registration-header">
+                        <h2>Volunteer Registration</h2>
+                        <p>Join our team of dedicated volunteers making a difference</p>
+                    </div>
+                    
+                    <div class="registration-form">
+                        <form class="volunteer-form" novalidate>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="firstName" class="form-label">First Name*</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lastName" class="form-label">Last Name*</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address*</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone Number*</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="city" class="form-label">City*</label>
+                                    <input type="text" class="form-control" id="city" name="city" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="state" class="form-label">State*</label>
+                                    <input type="text" class="form-control" id="state" name="state" required>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="interests" class="form-label">Areas of Interest*</label>
+                                    <select class="form-control" id="interests" name="interests" required>
+                                        <option value="" selected disabled>Select your area of interest</option>
+                                        <option value="education">Education & Tutoring</option>
+                                        <option value="events">Event Coordination</option>
+                                        <option value="digital">Digital Skills Training</option>
+                                        <option value="environment">Environmental Projects</option>
+                                        <option value="content">Content Creation</option>
+                                        <option value="health">Health Outreach</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="availability" class="form-label">Availability*</label>
+                                    <select class="form-control" id="availability" name="availability" required>
+                                        <option value="" selected disabled>Select your availability</option>
+                                        <option value="weekdays">Weekdays</option>
+                                        <option value="weekends">Weekends</option>
+                                        <option value="evenings">Evenings</option>
+                                        <option value="flexible">Flexible</option>
+                                        <option value="project">Project-based</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="skills" class="form-label">Skills & Experience</label>
+                                    <textarea class="form-control" id="skills" name="skills" rows="4" placeholder="Please share any relevant skills, experience, or qualifications that you bring to volunteering."></textarea>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="motivation" class="form-label">Motivation*</label>
+                                    <textarea class="form-control" id="motivation" name="motivation" rows="4" placeholder="What motivates you to volunteer with SANKET?" required></textarea>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to SANKET's volunteer terms and conditions, and consent to the processing of my personal data for volunteer management purposes.*
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            I would like to receive updates about SANKET's programs, events, and volunteer opportunities.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-submit">
+                                <button type="submit" class="btn primary-btn">Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p class="subtitle">Common questions about volunteering with SANKET</p>
+                </div>
+                
+                <div class="faq-container">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is the minimum time commitment required?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The time commitment varies depending on the volunteer role. Some positions require as little as 2-4 hours per week, while others may be project-based or event-specific. We value your time and try to be flexible, working with your schedule to find a suitable arrangement.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do I need specific qualifications to volunteer?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>While some roles may require specific skills or experience (such as teaching or healthcare backgrounds), many of our volunteer positions only require enthusiasm, dedication, and a willingness to learn. We provide training and support for all volunteers to ensure you feel confident in your role.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I volunteer remotely or do I need to be physically present?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer both in-person and remote volunteering opportunities. Roles such as content creation, social media management, and certain administrative tasks can be done remotely. However, many of our community-based programs require physical presence. Please specify your preference in your application.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What support will I receive as a volunteer?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>All volunteers receive an orientation, role-specific training, and ongoing support from our volunteer coordinators. We also organize regular volunteer meetings and provide resources to help you succeed in your role. Additionally, we offer certificates of participation and reference letters for long-term volunteers.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long does the application process take?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>After submitting your application, you can expect to hear from us within 5-7 business days. The entire process, including interviews and orientation, typically takes 2-3 weeks. For urgent volunteer needs or event-specific volunteering, the process may be expedited.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="cta-section bg-primary">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Make a Difference?</h2>
+                    <p>Join our community of volunteers and be part of the change you wish to see in the world.</p>
+                    <div class="cta-buttons">
+                        <a href="#registration" class="btn light-btn">Register Now</a>
+                        <a href="contact.html" class="btn outline-light-btn">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <h2>SANKET</h2>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </div>
+                    <p>SANKET is a non-governmental organization dedicated to empowering communities through education, skill development, and sustainable initiatives.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="journey.html">Journey So Far</a></li>
+                            <li><a href="volunteer.html">Volunteering</a></li>
+                            <li><a href="impact.html">Community Impact</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Programs</h3>
+                        <ul>
+                            <li><a href="#">Education Initiatives</a></li>
+                            <li><a href="#">Skill Development</a></li>
+                            <li><a href="#">Community Outreach</a></li>
+                            <li><a href="#">Environmental Projects</a></li>
+                            <li><a href="#">Health & Wellness</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">Donate</a></li>
+                            <li><a href="#">Fundraise</a></li>
+                            <li><a href="#">Corporate Partnerships</a></li>
+                            <li><a href="#">Volunteer</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Community Lane, New Delhi, 110001</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+911234567890">+91 123 456 7890</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@sanket.org">info@sanket.org</a></p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SANKET NGO. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize volunteer page carousel
+            new Carousel(document.getElementById('volunteer-carousel'), {
+                autoplay: true,
+                interval: 5000
+            });
+            
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100, // Offset for header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

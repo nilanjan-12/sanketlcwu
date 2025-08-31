@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stay updated with SANKET NGO's upcoming events, workshops, fundraisers, and community activities.">
+    <title>Upcoming Events - SANKET NGO</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Additional CSS for Events Page -->
+    <style>
+        /* Calendar Styles */
+        .calendar-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .calendar-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .calendar-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .calendar-nav button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .calendar-grid {
+            padding: 1.5rem;
+        }
+        
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .weekdays div {
+            padding: 0.5rem;
+        }
+        
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .days .day {
+            height: 100px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 0.5rem;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        
+        .days .day:hover {
+            background-color: rgba(var(--primary-rgb), 0.05);
+        }
+        
+        .days .day .date {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .days .day.today {
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .days .day.today .date {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .days .day.other-month {
+            background-color: #f9f9f9;
+            color: var(--text-light);
+        }
+        
+        .days .day .event-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .days .day .event-item {
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 3px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary-color);
+        }
+        
+        /* Event Cards Styles */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+        
+        .event-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-date {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .event-date i {
+            margin-right: 0.5rem;
+        }
+        
+        .event-content h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+        
+        .event-details {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .event-detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            color: var(--text-medium);
+        }
+        
+        .event-detail-item i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+            min-width: 16px;
+            margin-top: 4px;
+        }
+        
+        .event-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .event-status {
+            font-weight: 500;
+        }
+        
+        .event-status.open {
+            color: #28a745;
+        }
+        
+        .event-status.full {
+            color: #dc3545;
+        }
+        
+        .event-status.soon {
+            color: #ffc107;
+        }
+        
+        /* Featured Event Styles */
+        .featured-event {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+        
+        .featured-event-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .featured-event-image {
+            height: 100%;
+            min-height: 500px;
+            overflow: hidden;
+        }
+        
+        .featured-event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .featured-event-text {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .featured-label {
+            display: inline-block;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-event-text h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            line-height: 1.3;
+            color: var(--text-dark);
+        }
+        
+        .featured-event-text p {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .featured-event-details {
+            margin-bottom: 2rem;
+        }
+        
+        .featured-event-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-event-detail i {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(var(--primary-rgb), 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .featured-event-detail-content h4 {
+            margin: 0 0 0.2rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .featured-event-detail-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        /* Event Filters */
+        .event-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-button {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .filter-button.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Event Search */
+        .event-search {
+            margin-bottom: 2rem;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .search-input {
+            flex-grow: 1;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+        }
+        
+        /* Responsive Adjustments */
+        @media screen and (max-width: 992px) {
+            .featured-event-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-event-image {
+                min-height: 300px;
+            }
+            
+            .days .day {
+                height: 80px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .weekdays div {
+                font-size: 0.8rem;
+            }
+            
+            .days .day {
+                height: 60px;
+                font-size: 0.8rem;
+            }
+            
+            .days .day .event-item {
+                display: none;
+            }
+            
+            .days .day .event-dot {
+                margin-bottom: 0;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>SANKET</h1>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </a>
+                </div>
+                
+                <nav>
+                    <button class="menu-toggle" aria-label="Toggle navigation menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="journey.html">Journey So Far</a></li>
+                        <li><a href="volunteer.html">Volunteering</a></li>
+                        <li><a href="impact.html">Community Impact</a></li>
+                        <li><a href="events.html" class="active">Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <!-- Hero Section with Image Carousel -->
+        <section class="page-hero">
+            <div class="carousel-container" id="events-carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Upcoming+Events" alt="SANKET upcoming events and workshops">
+                        <div class="carousel-caption">
+                            <h2>Upcoming Events</h2>
+                            <p>Join us for impactful gatherings and community initiatives</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Workshops" alt="SANKET educational workshops">
+                        <div class="carousel-caption">
+                            <h2>Educational Workshops</h2>
+                            <p>Learn, grow, and develop new skills with our expert-led sessions</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://placehold.co/1200x600/e9ecef/495057?text=Fundraisers" alt="SANKET fundraising events">
+                        <div class="carousel-caption">
+                            <h2>Fundraising Events</h2>
+                            <p>Support our mission through engaging community fundraisers</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-button prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+        
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Join Our Events</h2>
+                    <p class="subtitle">Connect, learn, and make a difference with SANKET</p>
+                </div>
+                
+                <div class="intro-content">
+                    <p>SANKET organizes a variety of events throughout the year, from educational workshops and community service initiatives to fundraisers and awareness campaigns. These events provide opportunities for learning, networking, and making a positive impact in our communities.</p>
+                    
+                    <p>Whether you're interested in volunteering, developing new skills, or simply connecting with like-minded individuals, our events offer something for everyone. Browse our upcoming events below and join us in creating meaningful change.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Event Section -->
+        <section class="featured-event-section">
+            <div class="container">
+                <div class="featured-event">
+                    <div class="featured-event-content">
+                        <div class="featured-event-image">
+                            <img src="https://placehold.co/800x600/e9ecef/495057?text=Annual+Fundraising+Gala" alt="SANKET Annual Fundraising Gala">
+                        </div>
+                        <div class="featured-event-text">
+                            <span class="featured-label">Featured Event</span>
+                            <h2>Annual Fundraising Gala: Illuminating Futures</h2>
+                            <p>Join us for an elegant evening celebrating SANKET's achievements and raising funds for our educational initiatives. The gala will feature inspiring stories from our beneficiaries, live performances, a silent auction, and a gourmet dinner.</p>
+                            <p>Your participation will directly support our scholarship program, which provides educational opportunities to underprivileged children across India.</p>
+                            
+                            <div class="featured-event-details">
+                                <div class="featured-event-detail">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div class="featured-event-detail-content">
+                                        <h4>Date & Time</h4>
+                                        <p>November 15, 2023 | 7:00 PM - 10:30 PM</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="featured-event-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="featured-event-detail-content">
+                                        <h4>Location</h4>
+                                        <p>The Grand Ballroom, Hotel Imperial, New Delhi</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="featured-event-detail">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <div class="featured-event-detail-content">
+                                        <h4>Ticket Information</h4>
+                                        <p>₹5,000 per person | ₹45,000 for a table of 10</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a href="#" class="btn primary-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Calendar Section -->
+        <section class="calendar-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Events Calendar</h2>
+                    <p class="subtitle">Plan ahead with our monthly event schedule</p>
+                </div>
+                
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h3 class="calendar-title">November 2023</h3>
+                        <div class="calendar-nav">
+                            <button class="prev-month" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+                            <button class="next-month" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid">
+                        <div class="weekdays">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        
+                        <div class="days">
+                            <!-- Previous Month -->
+                            <div class="day other-month">
+                                <div class="date">29</div>
+                            </div>
+                            <div class="day other-month">
+                                <div class="date">30</div>
+                            </div>
+                            <div class="day other-month">
+                                <div class="date">31</div>
+                            </div>
+                            
+                            <!-- Current Month -->
+                            <div class="day">
+                                <div class="date">1</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">2</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">3</div>
+                                <div class="event-item">Volunteer Orientation</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">4</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">5</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">6</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">7</div>
+                                <div class="event-item">Digital Literacy Workshop</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">8</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">9</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">10</div>
+                                <div class="event-item">Community Clean-up</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">11</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">12</div>
+                                <div class="event-item">Health Camp</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">13</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">14</div>
+                            </div>
+                            <div class="day today">
+                                <div class="date">15</div>
+                                <div class="event-item">Annual Fundraising Gala</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">16</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">17</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">18</div>
+                                <div class="event-item">Youth Leadership Program</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">19</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">20</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">21</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">22</div>
+                                <div class="event-item">Sustainable Farming Workshop</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">23</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">24</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">25</div>
+                                <div class="event-item">Children's Day Celebration</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">26</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">27</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">28</div>
+                                <div class="event-item">Women's Entrepreneurship Day</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">29</div>
+                            </div>
+                            <div class="day">
+                                <div class="date">30</div>
+                            </div>
+                            
+                            <!-- Next Month -->
+                            <div class="day other-month">
+                                <div class="date">1</div>
+                            </div>
+                            <div class="day other-month">
+                                <div class="date">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Event Search and Filter Section -->
+        <section class="event-filter-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Find Events</h2>
+                    <p class="subtitle">Discover events that match your interests</p>
+                </div>
+                
+                <div class="event-search">
+                    <form class="search-form">
+                        <input type="text" class="search-input" placeholder="Search events..." aria-label="Search events">
+                        <button type="submit" class="btn primary-btn">Search</button>
+                    </form>
+                </div>
+                
+                <div class="event-filters">
+                    <button class="filter-button active">All Events</button>
+                    <button class="filter-button">Workshops</button>
+                    <button class="filter-button">Fundraisers</button>
+                    <button class="filter-button">Community Service</button>
+                    <button class="filter-button">Health Camps</button>
+                    <button class="filter-button">Educational</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Upcoming Events Section -->
+        <section class="upcoming-events-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Upcoming Events</h2>
+                    <p class="subtitle">Join us for these upcoming activities</p>
+                </div>
+                
+                <div class="event-grid">
+                    <!-- Event 1 -->
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Annual+Fundraising+Gala" alt="SANKET Annual Fundraising Gala">
+                            <span class="event-category">Fundraiser</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">
+                                <i class="fas fa-calendar-alt"></i> November 15, 2023 | 7:00 PM
+                            </div>
+                            <h3>Annual Fundraising Gala: Illuminating Futures</h3>
+                            <div class="event-details">
+                                <div class="event-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>The Grand Ballroom, Hotel Imperial, New Delhi</span>
+                                </div>
+                                <div class="event-detail-item">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>₹5,000 per person</span>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status open">Registration Open</span>
+                                <a href="#" class="btn text-btn">Register <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 2 -->
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Digital+Literacy+Workshop" alt="Digital Literacy Workshop">
+                            <span class="event-category">Workshop</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">
+                                <i class="fas fa-calendar-alt"></i> November 7, 2023 | 10:00 AM
+                            </div>
+                            <h3>Digital Literacy Workshop for Seniors</h3>
+                            <div class="event-details">
+                                <div class="event-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>SANKET Community Center, Seemapuri, Delhi</span>
+                                </div>
+                                <div class="event-detail-item">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>Free (Registration Required)</span>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status full">Fully Booked</span>
+                                <a href="#" class="btn text-btn">Join Waitlist <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 3 -->
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Community+Clean-up" alt="Community Clean-up Drive">
+                            <span class="event-category">Community Service</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">
+                                <i class="fas fa-calendar-alt"></i> November 10, 2023 | 8:00 AM
+                            </div>
+                            <h3>Yamuna River Clean-up Drive</h3>
+                            <div class="event-details">
+                                <div class="event-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Yamuna Ghat, Near ITO Bridge, Delhi</span>
+                                </div>
+                                <div class="event-detail-item">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>Free (Registration Required)</span>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status open">Registration Open</span>
+                                <a href="#" class="btn text-btn">Register <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 4 -->
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Health+Camp" alt="Health Camp">
+                            <span class="event-category">Health</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">
+                                <i class="fas fa-calendar-alt"></i> November 12, 2023 | 9:00 AM
+                            </div>
+                            <h3>Free Health Check-up Camp</h3>
+                            <div class="event-details">
+                                <div class="event-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Government School, Sangam Vihar, Delhi</span>
+                                </div>
+                                <div class="event-detail-item">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>Free (No Registration Required)</span>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status open">Open to All</span>
+                                <a href="#" class="btn text-btn">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 5 -->
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Youth+Leadership" alt="Youth Leadership Program">
+                            <span class="event-category">Educational</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">
+                                <i class="fas fa-calendar-alt"></i> November 18-19, 2023 | 10:00 AM
+                            </div>
+                            <h3>Youth Leadership Development Program</h3>
+                            <div class="event-details">
+                                <div class="event-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>SANKET Training Center, Connaught Place, Delhi</span>
+                                </div>
+                                <div class="event-detail-item">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>₹500 (Scholarships Available)</span>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status open">Registration Open</span>
+                                <a href="#" class="btn text-btn">Register <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 6 -->
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://placehold.co/600x400/e9ecef/495057?text=Sustainable+Farming" alt="Sustainable Farming Workshop">
+                            <span class="event-category">Workshop</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">
+                                <i class="fas fa-calendar-alt"></i> November 22, 2023 | 11:00 AM
+                            </div>
+                            <h3>Sustainable Farming Techniques Workshop</h3>
+                            <div class="event-details">
+                                <div class="event-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>SANKET Rural Center, Gurgaon Outskirts</span>
+                                </div>
+                                <div class="event-detail-item">
+                                    <i class="fas fa-ticket-alt"></i>
+                                    <span>₹200 (Free for Farmers)</span>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status soon">Registration Opens Soon</span>
+                                <a href="#" class="btn text-btn">Notify Me <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="#" class="btn primary-btn">View All Events</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Past Events Gallery Section -->
+        <section class="past-events-section bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Past Event Highlights</h2>
+                    <p class="subtitle">Moments from our previous events</p>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300/e9ecef/495057?text=Event+1" alt="Past event highlight">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300/e9ecef/495057?text=Event+2" alt="Past event highlight">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300/e9ecef/495057?text=Event+3" alt="Past event highlight">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300/e9ecef/495057?text=Event+4" alt="Past event highlight">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300/e9ecef/495057?text=Event+5" alt="Past event highlight">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300/e9ecef/495057?text=Event+6" alt="Past event highlight">
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="#" class="btn outline-btn">View Event Archive</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Event Registration Section -->
+        <section class="event-registration-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Host an Event with SANKET</h2>
+                    <p class="subtitle">Partner with us to create impactful community events</p>
+                </div>
+                
+                <div class="registration-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Are you interested in hosting an event in collaboration with SANKET? We welcome partnerships with schools, colleges, corporations, and community organizations to create meaningful events that align with our mission.</p>
+                            
+                            <p>Whether it's a fundraiser, awareness campaign, workshop, or community service initiative, we can work together to design and implement impactful events.</p>
+                            
+                            <h3>Types of Collaborations:</h3>
+                            <ul>
+                                <li>Corporate Social Responsibility (CSR) Events</li>
+                                <li>Educational Institution Partnerships</li>
+                                <li>Community Awareness Programs</li>
+                                <li>Skill Development Workshops</li>
+                                <li>Fundraising Events</li>
+                            </ul>
+                            
+                            <p>Fill out the form to start a conversation about potential collaborations.</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <form class="event-proposal-form" novalidate>
+                                <div class="form-group">
+                                    <label for="organization" class="form-label">Organization Name*</label>
+                                    <input type="text" class="form-control" id="organization" name="organization" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="contact-person" class="form-label">Contact Person*</label>
+                                    <input type="text" class="form-control" id="contact-person" name="contact-person" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address*</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone Number*</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="event-type" class="form-label">Event Type*</label>
+                                    <select class="form-control" id="event-type" name="event-type" required>
+                                        <option value="" selected disabled>Select event type</option>
+                                        <option value="workshop">Workshop</option>
+                                        <option value="fundraiser">Fundraiser</option>
+                                        <option value="awareness">Awareness Campaign</option>
+                                        <option value="community-service">Community Service</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="event-description" class="form-label">Event Description*</label>
+                                    <textarea class="form-control" id="event-description" name="event-description" rows="4" required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="proposed-date" class="form-label">Proposed Date(s)</label>
+                                    <input type="text" class="form-control" id="proposed-date" name="proposed-date" placeholder="MM/DD/YYYY or flexible">
+                                </div>
+                                
+                                <button type="submit" class="btn primary-btn">Submit Proposal</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="cta-section bg-primary">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Stay Updated on Our Events</h2>
+                    <p>Subscribe to our newsletter to receive event notifications and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your email address" required>
+                            <button type="submit" class="btn light-btn">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <h2>SANKET</h2>
+                        <span class="tagline">Leads to a Change Within Us</span>
+                    </div>
+                    <p>SANKET is a non-governmental organization dedicated to empowering communities through education, skill development, and sustainable initiatives.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="journey.html">Journey So Far</a></li>
+                            <li><a href="volunteer.html">Volunteering</a></li>
+                            <li><a href="impact.html">Community Impact</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Programs</h3>
+                        <ul>
+                            <li><a href="#">Education Initiatives</a></li>
+                            <li><a href="#">Skill Development</a></li>
+                            <li><a href="#">Community Outreach</a></li>
+                            <li><a href="#">Environmental Projects</a></li>
+                            <li><a href="#">Health & Wellness</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">Donate</a></li>
+                            <li><a href="#">Fundraise</a></li>
+                            <li><a href="#">Corporate Partnerships</a></li>
+                            <li><a href="#">Volunteer</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Community Lane, New Delhi, 110001</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+911234567890">+91 123 456 7890</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@sanket.org">info@sanket.org</a></p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SANKET NGO. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize events page carousels
+            new Carousel(document.getElementById('events-carousel'), {
+                autoplay: true,
+                interval: 5000
+            });
+            
+            // Calendar navigation
+            const prevMonthBtn = document.querySelector('.prev-month');
+            const nextMonthBtn = document.querySelector('.next-month');
+            const calendarTitle = document.querySelector('.calendar-title');
+            
+            if (prevMonthBtn && nextMonthBtn && calendarTitle) {
+                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                let currentMonthIndex = 10; // November (0-based index)
+                let currentYear = 2023;
+                
+                const updateCalendar = () => {
+                    calendarTitle.textContent = `${months[currentMonthIndex]} ${currentYear}`;
+                    // In a real implementation, this would also update the days grid
+                };
+                
+                prevMonthBtn.addEventListener('click', () => {
+                    currentMonthIndex--;
+                    if (currentMonthIndex < 0) {
+                        currentMonthIndex = 11;
+                        currentYear--;
+                    }
+                    updateCalendar();
+                });
+                
+                nextMonthBtn.addEventListener('click', () => {
+                    currentMonthIndex++;
+                    if (currentMonthIndex > 11) {
+                        currentMonthIndex = 0;
+                        currentYear++;
+                    }
+                    updateCalendar();
+                });
+            }
+            
+            // Event filters
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // In a real implementation, this would filter the events
+                    // based on the selected category
+                });
+            });
+            
+            // Form validation
+            const eventProposalForm = document.querySelector('.event-proposal-form');
+            
+            if (eventProposalForm) {
+                eventProposalForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    let isValid = true;
+                    const requiredFields = eventProposalForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.classList.add('is-invalid');
+                        } else {
+                            field.classList.remove('is-invalid');
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // In a real implementation, this would submit the form data
+                        alert('Thank you for your event proposal! Our team will review it and contact you soon.');
+                        eventProposalForm.reset();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
