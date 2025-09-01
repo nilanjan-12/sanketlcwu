@@ -186,11 +186,15 @@
     }
 
     .close-menu {
+        display: block;
         position: absolute;
         top: 20px;
         right: 20px;
         font-size: 2.4rem;
         cursor: pointer;
+        color: var(--text-dark);
+        z-index: 1002;
+        padding: 0.5rem;
     }
 
     .menu-overlay {
