@@ -30,9 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased bg-white text-gray-900">
+      <body className="font-sans antialiased bg-white text-gray-900 max-w-full">
         <Header />
-        <main className="min-h-screen">
+        <main>
           {children}
         </main>
         <Footer />

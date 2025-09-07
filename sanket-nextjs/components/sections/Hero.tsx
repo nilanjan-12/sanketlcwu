@@ -38,7 +38,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-600 to-indigo-800">
+    <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-600 to-indigo-800">
       {/* Background Image Carousel */}
       <div className="absolute inset-0">
         {heroImages.map((image, index) => (
@@ -96,7 +96,7 @@ export default function Hero() {
         </div>
 
         {/* Statistics */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-white mb-2">15+</div>
             <div className="text-white/80 text-sm uppercase tracking-wider">Years of Impact</div>

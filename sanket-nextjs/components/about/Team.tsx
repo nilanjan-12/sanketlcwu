@@ -2,19 +2,19 @@ import { Linkedin, Twitter, Mail } from 'lucide-react';
 
 const leadership = [
   {
-    name: 'Dr. Priya Sharma',
-    role: 'Founder & Executive Director',
-    bio: 'With over 20 years of experience in community development and social work, Dr. Sharma has dedicated her career to empowering marginalized communities through sustainable programs.',
+    name: 'Sourav',
+    role: 'Member',
+    bio: 'Sourav is a masters in Environmental Studies. As a part of his study he conducted several activities on noise pollution and associated health issues in urban set ups that necessitated his career to be professionally engaged in the social development sector. He has experience in working on the issues like violence in educational institutions such as ragging in educational institutions, environmental awareness and waste management. Now he is a part of the Education Department of West Bengal. He has been supporting SANKET in networking and advocacy..',
     image: '/images/team/priya-sharma.jpg',
     linkedin: '#',
     twitter: '#',
     email: 'priya@sanket.org'
   },
   {
-    name: 'Rajesh Kumar',
-    role: 'Director of Programs',
-    bio: 'An expert in program design and implementation with 15+ years in the non-profit sector. Rajesh oversees all our education and healthcare initiatives.',
-    image: '/images/team/rajesh-kumar.jpg',
+    name: 'Udartta',
+    role: 'Member',
+    bio: 'Udartta has a versatile career history. He is a masters in commerce and has a professional hold on Financial Accounting. Initially it propelled his career to be chosen as a nine to five person. He is also experienced in managing things at dockyards of Port Trust. Such professional skills somehow took a diversion and Udartta decided to drive in social development sector. He started working on child protection, one of the sensitive verticals of social development, with Childline India Foundation. He was also associated with AMFI-WB (The Association of Microfinance Institutions – West Bengal) and worked immensely on the vertical of Financial Literacy across Rural West Bengal. He has achieved another masters on Corporate Social Responsibility. Presently he is engaged in managing administration and finance for a developmental organization. Having almost a decade of experience in child protection and skill of financial management, he is supporting SANKET in planning and implementation of initiatives along with the management of finance.',
+    image: '"D:\OneDrive\Documents\GitHub\sanketlcwu\sanket-nextjs\public\imgi_66_website-photo-udartta.jpg"',
     linkedin: '#',
     twitter: '#',
     email: 'rajesh@sanket.org'

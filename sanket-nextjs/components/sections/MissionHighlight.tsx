@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function MissionHighlight() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Mission Content */}
