@@ -4,19 +4,19 @@ const missionItems = [
   {
     icon: Target,
     title: 'Our Mission',
-    description: 'To create sustainable positive change in communities through education, environmental conservation, and healthcare initiatives that empower individuals and strengthen society.',
+    description: 'We aim to prepare children and youth as change agents and help explore potential human resources within underprivileged communities towards ensuring the inclusive development of society.',
     color: 'from-blue-500 to-indigo-500'
   },
   {
     icon: Eye,
     title: 'Our Vision',
-    description: 'A world where every individual has access to quality education, clean environment, and healthcare services, creating equitable opportunities for all to thrive.',
+    description: 'SANKET has the vision to ensure the development and well-being of underprivileged, marginalized, untouched or least attended portions of society.',
     color: 'from-emerald-500 to-teal-500'
   },
   {
     icon: Heart,
-    title: 'Our Values',
-    description: 'Integrity, compassion, inclusivity, and sustainability guide every action we take. We believe in transparent operations and community-driven solutions.',
+    title: 'Core Values',
+    description: 'The core values are the reflection of our work and dedication. These values shape our path towards quality and sustainability.',
     color: 'from-rose-500 to-pink-500'
   },
   {
@@ -37,8 +37,8 @@ export default function Mission() {
             Our <span className="bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">Purpose</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            SANKET is driven by a fundamental belief that sustainable change comes from within communities. 
-            We work alongside local leaders to create lasting solutions that address real needs.
+            SANKET stands strong with universal peace in its own way. Through its creative, relatable ideas and effective implementing strategies, SANKET also aligns its purposes with the SDGs.
+
           </p>
         </div>
 

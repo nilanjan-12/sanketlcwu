@@ -6,7 +6,7 @@ import { Menu, X, Heart, Users, Leaf, GraduationCap } from 'lucide-react';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
-  { name: 'About Us', href: '/about', current: false },
+  { name: 'about Us', href: '/about', current: false },
   { name: 'Journey So Far', href: '/journey', current: false },
   { name: 'Volunteering', href: '/volunteer', current: false },
   { name: 'SANKET for Us', href: '/impact', current: false },

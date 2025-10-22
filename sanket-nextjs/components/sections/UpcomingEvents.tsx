@@ -3,23 +3,19 @@ import { MapPin, Clock } from 'lucide-react';
 
 const events = [
   {
-    date: { day: '15', month: 'Sep' },
-    title: 'Women Empowerment Workshop',
-    location: 'Rajgarh Village, Madhya Pradesh',
-    time: '10:00 AM - 3:00 PM'
+    date: { day: '', month: '' },
+    title: '',
+    location: '',
+    time: '',
+    hidden: true,
   },
   {
     date: { day: '22', month: 'Sep' },
-    title: 'Mobile Health Camp',
-    location: 'Marathwada Region, Maharashtra',
+    title: 'Talk Show over Tea',
+    location: 'Methligarh, Magra, Hooghly',
     time: '9:00 AM - 2:00 PM'
   },
-  {
-    date: { day: '30', month: 'Sep' },
-    title: 'Digital Literacy Training',
-    location: 'Urban Community Center, Delhi',
-    time: '10:00 AM - 4:00 PM'
-  }
+ 
 ];
 
 export default function UpcomingEvents() {
@@ -31,8 +27,11 @@ export default function UpcomingEvents() {
           <div className="w-24 h-1 bg-gradient-to-r from-indigo-600 to-emerald-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {events.map((event, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-12">
+          <div className="hidden md:block"></div>
+          {events
+            .filter(event => !event.hidden)
+            .map((event, index) => (
             <div
               key={index}
               className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all duration-200"
