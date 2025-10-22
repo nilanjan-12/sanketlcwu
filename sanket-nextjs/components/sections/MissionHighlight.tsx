@@ -9,10 +9,9 @@ export default function MissionHighlight() {
           <div className="flex-1">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Mission</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
-              SANKET works across 12 states in India, focusing on sustainable community development 
-              through education programs, healthcare initiatives, environmental conservation, women 
-              empowerment, and digital literacy. We believe in creating lasting change by empowering 
-              individuals and communities with resources, skills, and opportunities.
+              We aim to prepare children as change agents and help explore potential human resources
+               within underprivileged communities towards ensuring the inclusive development of society.
+
             </p>
             <Link
               href="/about"
@@ -26,9 +25,8 @@ export default function MissionHighlight() {
           {/* Mission Stats */}
           <div className="flex gap-6 flex-wrap lg:flex-col">
             {[
-              { number: '15+', text: 'Years of Impact' },
-              { number: '12', text: 'States Across India' },
-              { number: '2500+', text: 'Active Volunteers' },
+              { number: '7+', text: 'Years of Impact' },
+              { number: '8000+', text: 'Beneficiaries impacted' },
             ].map((stat, index) => (
               <div
                 key={index}

@@ -3,7 +3,35 @@
 import { useState } from 'react';
 import { Calendar, MapPin, Clock, Users, Tag, ExternalLink } from 'lucide-react';
 
-const upcomingEvents = [
+// Define TypeScript interfaces for our data
+interface AgendaItem {
+  time: string;
+  activity: string;
+}
+
+interface Event {
+  id: number;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  address: string;
+  category: string;
+  type: string;
+  capacity: number;
+  registered: number;
+  price: string;
+  image: string;
+  description: string;
+  highlights: string[];
+  agenda: AgendaItem[];
+  speakers: string[];
+  registrationUrl: string;
+  color: string;
+  featured: boolean;
+}
+
+const upcomingEvents: Event[] = [
   {
     id: 1,
     title: 'Annual Fundraising Gala 2024',
@@ -240,17 +268,17 @@ const upcomingEvents = [
   }
 ];
 
-const eventCategories = ['All Events', 'Fundraising', 'Training', 'Health', 'Environment', 'Leadership', 'Technology'];
+const eventCategories = ['All Events'];
 
 export default function UpcomingEvents() {
   const [selectedCategory, setSelectedCategory] = useState('All Events');
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   const filteredEvents = selectedCategory === 'All Events' 
     ? upcomingEvents 
     : upcomingEvents.filter(event => event.category === selectedCategory);
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
       weekday: 'long', 

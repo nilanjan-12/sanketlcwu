@@ -98,16 +98,13 @@ export default function Hero() {
         {/* Statistics */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-white mb-2">15+</div>
+            <div className="text-4xl md:text-5xl font-bold text-white mb-2">7+</div>
             <div className="text-white/80 text-sm uppercase tracking-wider">Years of Impact</div>
           </div>
+         
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-white mb-2">12</div>
-            <div className="text-white/80 text-sm uppercase tracking-wider">States Across India</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-white mb-2">2500+</div>
-            <div className="text-white/80 text-sm uppercase tracking-wider">Active Volunteers</div>
+            <div className="text-4xl md:text-5xl font-bold text-white mb-2">8000+</div>
+            <div className="text-white/80 text-sm uppercase tracking-wider">Beneficiaries impacted</div>
           </div>
         </div>
       </div>

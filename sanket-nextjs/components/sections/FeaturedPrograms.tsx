@@ -4,20 +4,20 @@ import { GraduationCap, Heart, Leaf } from 'lucide-react';
 const programs = [
   {
     icon: GraduationCap,
-    title: 'Education & Digital Literacy',
-    description: 'From rural learning centers to digital literacy programs, we\'re bridging the education gap and preparing communities for the digital future.',
+    title: 'MANTHAN',
+    description: 'SANKET originated MANTHAN to unify its ideas and activities related to exploring and nurturing hidden potentials of the people from cornered sections of society, especially in the children and youth. The word MANTHAN is a Sanskrit term which refers to the process of churning. All our activities dedicated to the said purpose are now under MANTHAN.',
     link: '/impact'
   },
   {
     icon: Heart,
-    title: 'Healthcare & Wellness',
-    description: 'Mobile health camps, health awareness programs, and community health initiatives bringing healthcare access to remote areas across India.',
+    title: 'Family Support Programme:',
+    description: ' The concept of family has been changing rapidly. The most unique epitome of living affectionately together is called a Family. With changing times, family became an unavoidable necessity, and then it has become a choice of living. This programme is a new addition to SANKET’s activities',
     link: '/impact'
   },
   {
     icon: Leaf,
-    title: 'Environmental & Agricultural Sustainability',
-    description: 'River restoration projects, sustainable farming techniques, and climate-resilient agriculture helping communities adapt to environmental challenges.',
+    title: 'Capacity Building Workshops:',
+    description: ' The term ‘capacity’ always indicates the hold of persons on their particular skill/s for coping with life and for unfolding potentialities. Having child-centered focus, the path always demands equal attention, attention also about the parents, the adults around children towards achieving the objectives. Engaging children in understanding their potential helps them cope with daily constraints, daily chores in the family. With this thought we continue to fetch objectives also by engaging the adults as much as possible in exploring their children, by practicing adaptable discourse with children and more such. We hope that both the aspects of child-friendly nature of parents and increasing adaptability in children can serve the purpose of inclusive development of children.',
     link: '/impact'
   }
 ];
